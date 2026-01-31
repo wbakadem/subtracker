@@ -1,0 +1,22 @@
+{
+  "name": "subtracker",
+  "version": "1.0.0",
+  "description": "Subscription tracker with Netlify Functions and Neon PostgreSQL",
+  "type": "module",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'No build step for static files'",
+    "migrate": "node db/migrate.js",
+    "test": "echo 'Tests not implemented'"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^0.9.0",
+    "bcryptjs": "^2.4.3",
+    "jsonwebtoken": "^9.0.2",
+    "joi": "^17.12.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "netlify-cli": "^17.0.0"
+  }
+}

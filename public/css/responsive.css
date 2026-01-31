@@ -1,0 +1,350 @@
+/* Responsive Styles - SubTracker */
+
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-card.wide {
+        grid-column: span 1;
+    }
+}
+
+/* Mobile (< 768px) */
+@media (max-width: 768px) {
+    /* Sidebar */
+    .sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    
+    /* Main Content */
+    .main-content {
+        margin-left: 0;
+        padding-bottom: 80px; /* Space for bottom nav */
+    }
+    
+    /* Header */
+    .header {
+        padding: var(--spacing-sm) var(--spacing-md);
+    }
+    
+    .menu-toggle {
+        display: flex;
+    }
+    
+    #page-title {
+        font-size: var(--font-size-lg);
+    }
+    
+    /* Pages */
+    .pages {
+        padding: var(--spacing-md);
+    }
+    
+    /* Stats Grid */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: var(--spacing-md);
+    }
+    
+    .stat-card {
+        padding: var(--spacing-md);
+    }
+    
+    .stat-icon {
+        width: 40px;
+        height: 40px;
+        font-size: var(--font-size-md);
+    }
+    
+    .stat-value {
+        font-size: var(--font-size-lg);
+    }
+    
+    /* Page Header */
+    .page-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .filter-tabs {
+        justify-content: center;
+    }
+    
+    /* Subscription Card */
+    .subscription-card {
+        padding: var(--spacing-sm);
+    }
+    
+    .sub-icon {
+        width: 40px;
+        height: 40px;
+        font-size: var(--font-size-md);
+    }
+    
+    .sub-amount {
+        font-size: var(--font-size-md);
+    }
+    
+    /* Modal */
+    .modal {
+        max-height: 95vh;
+        margin: var(--spacing-sm);
+    }
+    
+    .modal-body {
+        max-height: calc(95vh - 120px);
+    }
+    
+    /* Calculator */
+    .savings-amounts {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-lg);
+    }
+    
+    /* Profile */
+    .profile-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    /* Premium */
+    .premium-hero {
+        padding: var(--spacing-xl) var(--spacing-md);
+    }
+    
+    .premium-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.75rem;
+    }
+    
+    /* Toast */
+    .toast-container {
+        left: var(--spacing-md);
+        right: var(--spacing-md);
+        max-width: none;
+    }
+    
+    /* Timeline */
+    .timeline {
+        padding-left: 1.5rem;
+    }
+    
+    .timeline-item {
+        padding-left: var(--spacing-md);
+    }
+    
+    /* QR Code */
+    .qr-code {
+        max-width: 200px;
+    }
+}
+
+/* Small Mobile (< 480px) */
+@media (max-width: 480px) {
+    /* Stats Grid */
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    /* Auth */
+    .auth-container {
+        border-radius: 0;
+        min-height: 100vh;
+    }
+    
+    .auth-logo {
+        padding: var(--spacing-xl) var(--spacing-lg);
+    }
+    
+    .auth-logo i {
+        font-size: 2rem;
+    }
+    
+    .auth-logo h1 {
+        font-size: var(--font-size-xl);
+    }
+    
+    /* Bottom Nav */
+    .bottom-nav {
+        height: 60px;
+    }
+    
+    .bottom-nav .nav-item span {
+        font-size: 10px;
+    }
+    
+    /* Subscription Actions */
+    .sub-actions {
+        flex-direction: column;
+    }
+    
+    /* Filter Tabs */
+    .filter-tab {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: var(--font-size-xs);
+    }
+    
+    /* Chart */
+    .chart-container {
+        height: 200px;
+    }
+    
+    /* Modal Footer */
+    .modal-footer {
+        flex-direction: column;
+    }
+    
+    .modal-footer .btn {
+        width: 100%;
+    }
+}
+
+/* Large Screens (> 1440px) */
+@media (min-width: 1440px) {
+    .sidebar {
+        width: 280px;
+    }
+    
+    .main-content {
+        margin-left: 280px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .dashboard-card.wide {
+        grid-column: span 2;
+    }
+}
+
+/* Landscape Mobile */
+@media (max-height: 500px) and (orientation: landscape) {
+    .loading-screen {
+        padding: var(--spacing-md);
+    }
+    
+    .logo-animation {
+        font-size: 2rem;
+    }
+    
+    .loading-content h1 {
+        font-size: var(--font-size-xl);
+        margin-bottom: var(--spacing-md);
+    }
+    
+    .auth-logo {
+        padding: var(--spacing-md);
+    }
+    
+    .auth-logo i {
+        font-size: 2rem;
+        margin-bottom: var(--spacing-sm);
+    }
+    
+    .modal {
+        max-height: 98vh;
+    }
+    
+    .modal-body {
+        max-height: calc(98vh - 100px);
+    }
+}
+
+/* High DPI Screens */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    /* Sharper text rendering */
+    body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .sidebar,
+    .bottom-nav,
+    .header,
+    .toast-container,
+    .modal-container,
+    .btn {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 0;
+        padding: 0;
+    }
+    
+    .page {
+        display: block !important;
+    }
+    
+    .card,
+    .stat-card,
+    .dashboard-card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+        break-inside: avoid;
+    }
+}
+
+/* Safe Area Insets (Notch devices) */
+@supports (padding-top: env(safe-area-inset-top)) {
+    .header {
+        padding-top: calc(var(--spacing-md) + env(safe-area-inset-top));
+    }
+    
+    .sidebar {
+        padding-top: env(safe-area-inset-top);
+    }
+    
+    .bottom-nav {
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+}
+
+/* Dark mode preference detection */
+@media (prefers-color-scheme: dark) {
+    /* This is handled by JS, but we can add fallback styles */
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+    .btn:hover {
+        transform: none;
+    }
+    
+    .stat-card:hover {
+        transform: none;
+    }
+    
+    /* Larger touch targets */
+    .nav-item,
+    .btn,
+    .icon-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .sub-action-btn {
+        width: 44px;
+        height: 44px;
+    }
+}

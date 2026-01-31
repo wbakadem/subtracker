@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="SubTracker - Умный трекер подписок для контроля ваших расходов">
+    <meta name="theme-color" content="#6366f1">
+    <title>SubTracker - Умный трекер подписок</title>
+    
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/base.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/layout.css">
+    <link rel="stylesheet" href="/css/animations.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <div class="loading-content">
+            <div class="logo-animation">
+                <i class="fas fa-credit-card"></i>
+            </div>
+            <h1>SubTracker</h1>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toast-container" class="toast-container"></div>
+
+    <!-- Modal Container -->
+    <div id="modal-container" class="modal-container"></div>
+
+    <!-- Auth Screen -->
+    <div id="auth-screen" class="auth-screen hidden">
+        <div class="auth-container">
+            <div class="auth-logo">
+                <i class="fas fa-credit-card"></i>
+                <h1>SubTracker</h1>
+                <p>Умный трекер подписок</p>
+            </div>
+            
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-tab="login">Вход</button>
+                <button class="auth-tab" data-tab="register">Регистрация</button>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="login-form" class="auth-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="login-email" placeholder="your@email.com" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="login-password">Пароль</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="login-password" placeholder="••••••••" required>
+                        <button type="button" class="toggle-password" data-target="login-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">
+                    <span class="btn-text">Войти</span>
+                    <span class="btn-loader hidden"><i class="fas fa-spinner fa-spin"></i></span>
+                </button>
+            </form>
+            
+            <!-- Register Form -->
+            <form id="register-form" class="auth-form hidden">
+                <div class="form-group">
+                    <label for="register-email">Email</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="register-email" placeholder="your@email.com" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-password">Пароль</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="register-password" placeholder="Минимум 8 символов" required minlength="8">
+                        <button type="button" class="toggle-password" data-target="register-password">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <span class="form-hint">Минимум 8 символов</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="register-password-confirm">Подтвердите пароль</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="register-password-confirm" placeholder="••••••••" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary btn-full">
+                    <span class="btn-text">Зарегистрироваться</span>
+                    <span class="btn-loader hidden"><i class="fas fa-spinner fa-spin"></i></span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main App -->
+    <div id="app" class="app hidden">
+        <!-- Sidebar (Desktop) -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-credit-card"></i>
+                    <span>SubTracker</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#dashboard" class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-chart-pie"></i>
+                    <span>Дашборд</span>
+                </a>
+                <a href="#subscriptions" class="nav-item" data-page="subscriptions">
+                    <i class="fas fa-list"></i>
+                    <span>Подписки</span>
+                    <span id="sidebar-sub-count" class="badge hidden">0</span>
+                </a>
+                <a href="#timeline" class="nav-item" data-page="timeline">
+                    <i class="fas fa-calendar-alt"></i>
+                    <span>Таймлайн</span>
+                </a>
+                <a href="#calculator" class="nav-item" data-page="calculator">
+                    <i class="fas fa-calculator"></i>
+                    <span>Калькулятор</span>
+                </a>
+                <a href="#premium" class="nav-item premium-nav-item" data-page="premium">
+                    <i class="fas fa-crown"></i>
+                    <span>Premium</span>
+                </a>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <a href="#profile" class="nav-item" data-page="profile">
+                    <i class="fas fa-user"></i>
+                    <span>Профиль</span>
+                </a>
+                <button id="theme-toggle" class="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="header">
+                <button class="menu-toggle mobile-only">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <h1 id="page-title">Дашборд</h1>
+                <div class="header-actions">
+                    <button id="notifications-btn" class="icon-btn">
+                        <i class="fas fa-bell"></i>
+                        <span id="notification-badge" class="badge hidden">0</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Pages -->
+            <div class="pages">
+                <!-- Dashboard Page -->
+                <div id="dashboard-page" class="page active">
+                    <div class="stats-grid">
+                        <div class="stat-card primary">
+                            <div class="stat-icon">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">В месяц</span>
+                                <span id="monthly-total" class="stat-value">0 ₽</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card secondary">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">В год</span>
+                                <span id="yearly-total" class="stat-value">0 ₽</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card accent">
+                            <div class="stat-icon">
+                                <i class="fas fa-list"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">Подписок</span>
+                                <span id="sub-count" class="stat-value">0</span>
+                            </div>
+                        </div>
+                        
+                        <div class="stat-card warning">
+                            <div class="stat-icon">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-label">Скоро списание</span>
+                                <span id="upcoming-count" class="stat-value">0</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3>Распределение по категориям</h3>
+                            </div>
+                            <div class="card-content">
+                                <div id="category-chart" class="chart-container">
+                                    <canvas id="category-canvas"></canvas>
+                                    <div id="category-legend" class="chart-legend"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <div class="card-header">
+                                <h3>Ближайшие списания</h3>
+                            </div>
+                            <div class="card-content">
+                                <div id="upcoming-payments" class="upcoming-list">
+                                    <div class="empty-state">
+                                        <i class="fas fa-check-circle"></i>
+                                        <p>Нет ближайших списаний</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="dashboard-card wide">
+                            <div class="card-header">
+                                <h3>Динамика расходов</h3>
+                            </div>
+                            <div class="card-content">
+                                <div id="trend-chart" class="chart-container">
+                                    <canvas id="trend-canvas"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subscriptions Page -->
+                <div id="subscriptions-page" class="page">
+                    <div class="page-header">
+                        <div class="filter-tabs">
+                            <button class="filter-tab active" data-filter="all">Все</button>
+                            <button class="filter-tab" data-filter="active">Активные</button>
+                            <button class="filter-tab" data-filter="inactive">Неактивные</button>
+                        </div>
+                        <button id="add-sub-btn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                            <span>Добавить</span>
+                        </button>
+                    </div>
+
+                    <div id="subscriptions-list" class="subscriptions-list">
+                        <div class="empty-state">
+                            <i class="fas fa-credit-card"></i>
+                            <h3>Нет подписок</h3>
+                            <p>Добавьте свою первую подписку, чтобы начать отслеживание</p>
+                            <button class="btn btn-primary" onclick="app.openAddSubscriptionModal()">
+                                <i class="fas fa-plus"></i>
+                                Добавить подписку
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Timeline Page -->
+                <div id="timeline-page" class="page">
+                    <div class="timeline-container">
+                        <div id="timeline" class="timeline">
+                            <div class="empty-state">
+                                <i class="fas fa-calendar-alt"></i>
+                                <h3>Таймлайн пуст</h3>
+                                <p>Добавьте подписки, чтобы увидеть график списаний</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calculator Page -->
+                <div id="calculator-page" class="page">
+                    <div class="calculator-container">
+                        <div class="calculator-intro">
+                            <h2>Калькулятор экономии</h2>
+                            <p>Выберите подписки, которые вы могли бы отменить, чтобы увидеть потенциальную экономию</p>
+                        </div>
+
+                        <div id="calculator-subs" class="calculator-subs">
+                            <div class="empty-state">
+                                <i class="fas fa-calculator"></i>
+                                <h3>Нет данных для расчета</h3>
+                                <p>Добавьте подписки, чтобы использовать калькулятор</p>
+                            </div>
+                        </div>
+
+                        <div id="savings-result" class="savings-result hidden">
+                            <div class="savings-card">
+                                <h3>Ваша потенциальная экономия</h3>
+                                <div class="savings-amounts">
+                                    <div class="savings-item">
+                                        <span class="savings-label">В месяц</span>
+                                        <span id="savings-monthly" class="savings-value">0 ₽</span>
+                                    </div>
+                                    <div class="savings-item">
+                                        <span class="savings-label">В год</span>
+                                        <span id="savings-yearly" class="savings-value">0 ₽</span>
+                                    </div>
+                                    <div class="savings-item">
+                                        <span class="savings-label">За 5 лет</span>
+                                        <span id="savings-5years" class="savings-value">0 ₽</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Premium Page -->
+                <div id="premium-page" class="page">
+                    <div class="premium-container">
+                        <div class="premium-hero">
+                            <div class="premium-icon">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <h2>SubTracker Premium</h2>
+                            <p>Разблокируйте полный потенциал вашего трекера подписок</p>
+                        </div>
+
+                        <div class="pricing-card">
+                            <div class="pricing-header">
+                                <span class="pricing-badge">Навсегда</span>
+                                <div class="pricing-amount">
+                                    <span class="price">10 ₽</span>
+                                    <span class="price-note">единоразово</span>
+                                </div>
+                            </div>
+
+                            <ul class="premium-features">
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    <span>Неограниченное количество подписок</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    <span>Экспорт данных в CSV</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    <span>Детальная аналитика</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    <span>Drag-and-drop сортировка</span>
+                                </li>
+                                <li>
+                                    <i class="fas fa-check"></i>
+                                    <span>Приоритетная поддержка</span>
+                                </li>
+                            </ul>
+
+                            <button id="buy-premium-btn" class="btn btn-premium btn-full">
+                                <i class="fas fa-crown"></i>
+                                <span>Получить Premium</span>
+                            </button>
+                        </div>
+
+                        <div id="premium-active" class="premium-active hidden">
+                            <div class="success-card">
+                                <i class="fas fa-check-circle"></i>
+                                <h3>Premium активирован!</h3>
+                                <p id="premium-date">Активирован: --</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Page -->
+                <div id="profile-page" class="page">
+                    <div class="profile-container">
+                        <div class="profile-header">
+                            <div class="profile-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="profile-info">
+                                <h2 id="profile-email">user@example.com</h2>
+                                <span id="profile-status" class="status-badge free">Free</span>
+                            </div>
+                        </div>
+
+                        <div class="profile-sections">
+                            <div class="profile-section">
+                                <h3>Безопасность</h3>
+                                <button id="change-password-btn" class="btn btn-secondary btn-full">
+                                    <i class="fas fa-key"></i>
+                                    <span>Сменить пароль</span>
+                                </button>
+                            </div>
+
+                            <div class="profile-section">
+                                <h3>Данные</h3>
+                                <button id="export-csv-btn" class="btn btn-secondary btn-full" disabled>
+                                    <i class="fas fa-download"></i>
+                                    <span>Экспорт в CSV</span>
+                                    <span class="premium-tag">Premium</span>
+                                </button>
+                            </div>
+
+                            <div class="profile-section danger">
+                                <h3>Опасная зона</h3>
+                                <button id="delete-account-btn" class="btn btn-danger btn-full">
+                                    <i class="fas fa-trash"></i>
+                                    <span>Удалить аккаунт</span>
+                                </button>
+                            </div>
+
+                            <div class="profile-section">
+                                <button id="logout-btn" class="btn btn-secondary btn-full">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    <span>Выйти</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Bottom Navigation (Mobile) -->
+        <nav class="bottom-nav mobile-only">
+            <a href="#dashboard" class="nav-item active" data-page="dashboard">
+                <i class="fas fa-chart-pie"></i>
+                <span>Дашборд</span>
+            </a>
+            <a href="#subscriptions" class="nav-item" data-page="subscriptions">
+                <i class="fas fa-list"></i>
+                <span>Подписки</span>
+            </a>
+            <a href="#timeline" class="nav-item" data-page="timeline">
+                <i class="fas fa-calendar-alt"></i>
+                <span>Таймлайн</span>
+            </a>
+            <a href="#profile" class="nav-item" data-page="profile">
+                <i class="fas fa-user"></i>
+                <span>Профиль</span>
+            </a>
+        </nav>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/utils.js"></script>
+    <script src="/js/api.js"></script>
+    <script src="/js/auth.js"></script>
+    <script src="/js/ui.js"></script>
+    <script src="/js/charts.js"></script>
+    <script src="/js/app.js"></script>
+    
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/sw.js')
+                .then(reg => console.log('Service Worker registered'))
+                .catch(err => console.log('Service Worker registration failed'));
+        }
+    </script>
+</body>
+</html>

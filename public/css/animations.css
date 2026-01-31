@@ -1,0 +1,400 @@
+/* Animations - SubTracker */
+
+/* Fade In */
+.fade-in {
+    animation: fadeIn var(--transition-normal);
+}
+
+.fade-in-up {
+    animation: fadeInUp var(--transition-normal);
+}
+
+.fade-in-down {
+    animation: fadeInDown var(--transition-normal);
+}
+
+/* Slide In */
+.slide-in-left {
+    animation: slideInLeft var(--transition-normal);
+}
+
+.slide-in-right {
+    animation: slideInRight var(--transition-normal);
+}
+
+/* Scale In */
+.scale-in {
+    animation: scaleIn var(--transition-normal);
+}
+
+/* Pulse Animation */
+.pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+/* Spin */
+.spin {
+    animation: spin 1s linear infinite;
+}
+
+/* Bounce */
+.bounce {
+    animation: bounce 1s ease-in-out infinite;
+}
+
+/* Float */
+.float {
+    animation: float 3s ease-in-out infinite;
+}
+
+/* Stagger Animation for Lists */
+.stagger-item {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp var(--transition-normal) forwards;
+}
+
+.stagger-item:nth-child(1) { animation-delay: 0.05s; }
+.stagger-item:nth-child(2) { animation-delay: 0.1s; }
+.stagger-item:nth-child(3) { animation-delay: 0.15s; }
+.stagger-item:nth-child(4) { animation-delay: 0.2s; }
+.stagger-item:nth-child(5) { animation-delay: 0.25s; }
+.stagger-item:nth-child(6) { animation-delay: 0.3s; }
+.stagger-item:nth-child(7) { animation-delay: 0.35s; }
+.stagger-item:nth-child(8) { animation-delay: 0.4s; }
+.stagger-item:nth-child(9) { animation-delay: 0.45s; }
+.stagger-item:nth-child(10) { animation-delay: 0.5s; }
+
+/* Card Hover Effects */
+.card-hover {
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+/* Button Press Effect */
+.btn-press:active {
+    transform: scale(0.98);
+}
+
+/* Ripple Effect */
+.ripple {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-full);
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+.ripple:active::after {
+    width: 200%;
+    height: 200%;
+}
+
+/* Loading Skeleton Shimmer */
+.skeleton-shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton-shimmer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.4),
+        transparent
+    );
+    animation: shimmer 1.5s infinite;
+}
+
+/* Notification Badge Pulse */
+.badge-pulse {
+    animation: badgePulse 2s ease-in-out infinite;
+}
+
+@keyframes badgePulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Progress Bar Animation */
+.progress-bar-animated {
+    background: linear-gradient(
+        90deg,
+        var(--primary-500),
+        var(--secondary-500),
+        var(--primary-500)
+    );
+    background-size: 200% 100%;
+    animation: progressBar 2s linear infinite;
+}
+
+@keyframes progressBar {
+    0% {
+        background-position: 200% 0;
+    }
+    100% {
+        background-position: -200% 0;
+    }
+}
+
+/* Chart Animation */
+.chart-animate {
+    animation: chartGrow 1s ease-out forwards;
+    transform-origin: bottom;
+}
+
+@keyframes chartGrow {
+    from {
+        transform: scaleY(0);
+    }
+    to {
+        transform: scaleY(1);
+    }
+}
+
+/* Page Transition */
+.page-transition-enter {
+    opacity: 0;
+    transform: translateX(20px);
+}
+
+.page-transition-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+.page-transition-exit {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.page-transition-exit-active {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity var(--transition-normal), transform var(--transition-normal);
+}
+
+/* Modal Animation */
+.modal-enter {
+    opacity: 0;
+}
+
+.modal-enter .modal {
+    transform: scale(0.9) translateY(20px);
+}
+
+.modal-enter-active {
+    opacity: 1;
+    transition: opacity var(--transition-normal);
+}
+
+.modal-enter-active .modal {
+    transform: scale(1) translateY(0);
+    transition: transform var(--transition-normal);
+}
+
+.modal-exit {
+    opacity: 1;
+}
+
+.modal-exit .modal {
+    transform: scale(1) translateY(0);
+}
+
+.modal-exit-active {
+    opacity: 0;
+    transition: opacity var(--transition-normal);
+}
+
+.modal-exit-active .modal {
+    transform: scale(0.9) translateY(20px);
+    transition: transform var(--transition-normal);
+}
+
+/* Toast Animation */
+.toast-enter {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.toast-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+    transition: all var(--transition-normal);
+}
+
+.toast-exit {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.toast-exit-active {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: all var(--transition-normal);
+}
+
+/* Drag and Drop */
+.dragging {
+    opacity: 0.5;
+    transform: scale(1.02);
+    box-shadow: var(--shadow-xl);
+}
+
+.drag-over {
+    border: 2px dashed var(--primary-500);
+    background-color: var(--primary-50);
+}
+
+/* Glow Effect */
+.glow {
+    animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        box-shadow: 0 0 5px var(--primary-500), 0 0 10px var(--primary-500);
+    }
+    to {
+        box-shadow: 0 0 20px var(--primary-500), 0 0 30px var(--primary-500);
+    }
+}
+
+/* Shake Animation (for errors) */
+.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Success Checkmark Animation */
+.checkmark {
+    animation: checkmark 0.5s ease-in-out forwards;
+}
+
+@keyframes checkmark {
+    0% {
+        transform: scale(0);
+        opacity: 0;
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Loading Dots */
+.loading-dots {
+    display: inline-flex;
+    gap: 4px;
+}
+
+.loading-dots span {
+    width: 8px;
+    height: 8px;
+    background-color: currentColor;
+    border-radius: var(--radius-full);
+    animation: loadingDots 1.4s ease-in-out infinite;
+}
+
+.loading-dots span:nth-child(1) { animation-delay: 0s; }
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes loadingDots {
+    0%, 80%, 100% {
+        transform: scale(0);
+        opacity: 0.5;
+    }
+    40% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Hover Lift Effect */
+.hover-lift {
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* Gradient Border Animation */
+.gradient-border {
+    position: relative;
+    background: var(--bg-primary);
+    border-radius: var(--radius-lg);
+}
+
+.gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    background: linear-gradient(45deg, var(--primary-500), var(--secondary-500), var(--accent-cyan));
+    border-radius: calc(var(--radius-lg) + 2px);
+    z-index: -1;
+    animation: gradientRotate 3s linear infinite;
+    background-size: 200% 200%;
+}
+
+@keyframes gradientRotate {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Focus Ring Animation */
+.focus-ring {
+    position: relative;
+}
+
+.focus-ring::after {
+    content: '';
+    position: absolute;
+    inset: -4px;
+    border: 2px solid var(--primary-500);
+    border-radius: calc(var(--radius-md) + 4px);
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all var(--transition-fast);
+}
+
+.focus-ring:focus-visible::after {
+    opacity: 1;
+    transform: scale(1);
+}
